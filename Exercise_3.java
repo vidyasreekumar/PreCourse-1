@@ -1,14 +1,15 @@
-// Time Complexity : O(n)
+// Time Complexity : O(1)
+// printing list : O(n)
 // Space Complexity : O(n)
 
 import java.io.*; 
   
 // Java program to implement 
 // a Singly Linked List 
-public class LinkedList { 
+class LinkedList { 
   
     Node head; // head of list 
-  
+    Node tail; // tail of list
     // Linked list Node. 
     // This inner class is made static 
     // so that main() can access it 
@@ -40,15 +41,14 @@ public class LinkedList {
             // Insert the new_node at last node 
         // Return the list by head 
         Node newNode = new Node(data);
-        if(list.head != null) {
-            Node curr = list.head;
-            while(curr.next != null)
-                curr = curr.next;
-            curr.next = newNode;
+        if(list.tail != null) {
+            list.tail.next = newNode;
+            list.tail = newNode;
         }
-        else 
+        else {
             list.head = newNode;
-
+            list.tail = newNode;
+        }
         return list;
     } 
   
@@ -61,11 +61,16 @@ public class LinkedList {
        
             // Go to next node
         Node curr = list.head;
-        while(curr.next != null) {
-            System.out.print(curr.data + " -> ");
-            curr = curr.next;
-        } 
-        System.out.print(curr.data);
+        if(curr != null) {
+            while(curr.next != null) {
+                System.out.print(curr.data + " -> ");
+                curr = curr.next;
+            } 
+            System.out.print(curr.data);
+        }
+        else {
+            System.out.println("List is empty");
+        }
     } 
    
     // Driver code 
